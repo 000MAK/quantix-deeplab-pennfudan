@@ -1,12 +1,18 @@
-# DeepLabV3 Pedestrian Segmentation
+# DeepLabV3 Pedestrian Segmentation | Penn-Fudan
 
-Fine-tune a lightweight torchvision DeepLabV3 MobileNet model on the Penn-Fudan pedestrian dataset; downloads and safely extracts source data.
+A small torchvision DeepLabV3-MobileNetV3 model trained from scratch for binary pedestrian-mask segmentation. The script downloads the Penn-Fudan data, creates deterministic train/validation/test splits, and saves a held-out pixel-accuracy summary.
 
 ## Run
 
-Use Python 3.10+ in a virtual environment; install `pip install -r requirements.txt`, then run `python main.py --help` (or see project-specific command below). Dataset files, model weights and outputs are kept locally and ignored by Git.
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python main.py --epochs 1
+```
 
-Training code uses a fixed random seed/split and writes held-out metrics and model artifacts to `outputs/`.
-## Dataset source
+See `python main.py --help` for options. Dataset files are cached in `data/`; checkpoints and metrics are written to `outputs/`. These runtime artifacts are excluded from Git.
 
-Downloads the Penn-Fudan pedestrian image and mask dataset from the [University of Pennsylvania project page](https://www.cis.upenn.edu/~jshi/ped_html/).
+## Data and limits
+
+Source: [University of Pennsylvania - Penn-Fudan Pedestrian Dataset](https://www.cis.upenn.edu/~jshi/ped_html/). It is a small educational dataset; one run is a pipeline demonstration, not a meaningful general-purpose benchmark.

@@ -19,7 +19,7 @@ def main():
   with zipfile.ZipFile(z) as f:
    if any('..' in Path(n).parts or n.startswith('/') for n in f.namelist()): raise ValueError('Unsafe archive')
    f.extractall(d)
- ds=Seg(d); n=len(ds); tr,va,te=random_split(ds,[int(n*.7),int(n*.15),n-int(n*.85)],generator=torch.Generator().manual_seed(42)); device='cuda' if torch.cuda.is_available() else 'cpu'; model=models.segmentation.deeplabv3_mobilenet_v3_large(weights=None,weights_backbone=None,num_classes=2).to(device); opt=torch.optim.AdamW(model.parameters(),lr=2e-4)
+ ds=Seg(d); n=len(ds); train_size=int(n*.7); val_size=int(n*.15); test_size=n-train_size-val_size; tr,va,te=random_split(ds,[train_size,val_size,test_size],generator=torch.Generator().manual_seed(42)); device='cuda' if torch.cuda.is_available() else 'cpu'; model=models.segmentation.deeplabv3_mobilenet_v3_large(weights=None,weights_backbone=None,num_classes=2).to(device); opt=torch.optim.AdamW(model.parameters(),lr=2e-4)
  def run(part,train=False):
   model.train(train); losses=[]; hit=tot=0
   for x,y in DataLoader(part,batch_size=2,shuffle=train):

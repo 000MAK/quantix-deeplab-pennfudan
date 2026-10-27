@@ -16,3 +16,24 @@ See `python main.py --help` for options. Dataset files are cached in `data/`; ch
 ## Data and limits
 
 Source: [University of Pennsylvania - Penn-Fudan Pedestrian Dataset](https://www.cis.upenn.edu/~jshi/ped_html/). It is a small educational dataset; one run is a pipeline demonstration, not a meaningful general-purpose benchmark.
+
+## Results
+
+A one-epoch local run reached held-out test **pixel accuracy 0.854**. Background dominates the pixels, so pixel accuracy alone overstates quality; report pedestrian IoU before interpreting the model.
+
+## Repository contents
+
+| File | Purpose |
+|---|---|
+| `.gitignore` | Keeps data, weights and outputs out of Git |
+| `LICENSE` | MIT licence for the code |
+| `main.py` | Training and evaluation script |
+| `requirements.txt` | Python dependencies |
+
+## License
+
+Code is released under the MIT License (see `LICENSE`). Datasets keep their own licences and are downloaded at run time, not redistributed here.
+
+## Related
+
+Part of a set of compact, reproducible ML/DL baselines by [000MAK](https://github.com/000MAK). Flagship research project: [QMASE martial-arts analytics engine](https://github.com/000MAK/quantix-martial-arts-engine).
